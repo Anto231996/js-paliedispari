@@ -1,54 +1,55 @@
-/* Palindroma:
+let userChoice = "";
 
--Chiedere all’utente di inserire una parola
--Creare una funzione per capire se la parola inserita è palindroma
-
-
-
-
-Pari e Dispari
-
--L’utente sceglie pari o dispari e inserisce un numero da 1 a 5.
--Generiamo un numero random (sempre da 1 a 5) per il computer (usando una funzione).
--Sommiamo i due numeri
--Stabiliamo se la somma dei due numeri è pari o dispari (usando una funzione)
--Dichiariamo chi ha vinto.*/
-
-
-//PALINDROMA
-
-/* const word = prompt("inserisci una parola");
-
-function palindroma (word){
-    let reverseWord
-    for ( let i = word.length -1; i >= 0; i-- ){
-        console.log(word.charAt(i))
-    }
-
-    if(reverseWord == word){return true}
-    else {return false};
-} */
-
-
-//PARI E DISPARI
-
-const evenOrOddUser = prompt("pari o dispari");
-const userNum = parseInt( prompt("scegli un numero"));
-
-
-console.log(userNum)
-
-function randomNum() {
-    return Math.floor(Math.random() * 5) + 1;
+while (userChoice != "even" && userChoice != "odd") {
+  userChoice = prompt("Odd or even?").toLowerCase().trim();
 }
 
-const sum = userNum + randomNum()
-console.log(sum)
+let userNumber = 0;
 
-function isEven (sum){
-    if(sum % 2 == 0){
-        return true
-    } else {
-        return false
-    }
+while (userNumber < 1 || userNumber > 5 || isNaN(userNumber)) {
+  userNumber = parseInt(prompt("Insert a number between 1 and 5").trim());
+}
+
+const aINumber = randomInteger(1, 5);
+console.log(aINumber);
+const sum = aINumber + userNumber;
+
+if (
+  (userChoice == "even" && isEven(sum)) ||
+  (userChoice == "odd" && !isEven(sum))
+) {
+  console.log("hai vinto!", " la somma è: ", sum);
+} else {
+  console.log("hai vinto!", " la somma è: ", sum);
+}
+
+function isPalindromeInPlace(stringToCheck) {
+  let reversedString = "";
+
+  for (let i = stringToCheck.length - 1; i >= 0; i--) {
+    reversedString += stringToCheck.charAt(i);
+  }
+
+  if (reversedString == stringToCheck) {
+    return true;
+  }
+
+  return false;
+}
+
+function isPalindromeByArray(stringToCheck) {
+  return stringToCheck.split("").reverse().join("") == stringToCheck;
+}
+
+function randomInteger(minimumValue, maximumValue) {
+  if (isNaN(parseInt(minimumValue)) || isNaN(parseInt(maximumValue))) {
+    console.error("randomInteger(min, max) needs two numbers as argument");
+  }
+  return Math.floor(
+    Math.random() * (maximumValue + 1 - minimumValue) + minimumValue
+  );
+}
+
+function isEven(number) {
+  return number % 2 === 0;
 }
